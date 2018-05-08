@@ -11,8 +11,8 @@ RUN apk add -U --virtual deps \
         zlib-dev pcre-dev && \
     apk add pcre && \
     cd ~ && \
-    wget --tries=10  https://downloads.sourceforge.net/ijbswa/privoxy-$PRI_VER-stable-src.tar.gz && \
-    tar xf privoxy-$PRI_VER-stable-src.tar.gz && \
+    wget http://http.debian.net/debian/pool/main/p/privoxy/privoxy_$PRI_VER.orig.tar.gz && \
+    tar xf privoxy_$PRI_VER.orig.tar.gz && \
     cd ~/privoxy-$PRI_VER-stable && \
     autoheader && \
     autoconf && \
