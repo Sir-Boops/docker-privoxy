@@ -1,6 +1,7 @@
 FROM alpine:3.7
 
 ENV PRI_VER="3.0.26"
+ENV SHA_SUM="57e415b43ee5dfdca74685cc034053eaae962952fdabd086171551a86abf9cd8"
 
 RUN addgroup privoxy && \
     adduser -H -D -G privoxy privoxy && \
@@ -11,8 +12,9 @@ RUN apk add -U --virtual deps \
         zlib-dev pcre-dev && \
     apk add pcre && \
     cd ~ && \
-    wget http://http.debian.net/debian/pool/main/p/privoxy/privoxy_$PRI_VER.orig.tar.gz && \
-    tar xf privoxy_$PRI_VER.orig.tar.gz && \
+    wget -O privoxy.tar.gz http://http.debian.net/debian/pool/main/p/privoxy/privoxy_$PRI_VER.orig.tar.gz && \
+    echo "$SHA_SUM *privoxy.tar.gz" | sha256sum -c - && \
+    tar xf privoxy.tar.gz && \
     cd ~/privoxy-$PRI_VER-stable && \
     autoheader && \
     autoconf && \
@@ -21,3 +23,5 @@ RUN apk add -U --virtual deps \
     make install && \
     apk del --purge deps && \
     rm -rf ~/*
+
+CMD /opt/sbin/privoxy --no-daemon --user privoxy.privoxy /opt/config
