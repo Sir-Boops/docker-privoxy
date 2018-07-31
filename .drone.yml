@@ -1,0 +1,9 @@
+pipeline:
+    docker:
+        image: plugins/docker
+        dockerfile: Dockerfile
+        repo: sirboops/privoxy
+        tags: [3.0.26, latest]
+        experimental: true
+        squash: true
+        secrets: [ docker_username, docker_password ]
