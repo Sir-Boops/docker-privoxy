@@ -3,10 +3,6 @@ FROM alpine:3.7
 ENV PRI_VER="3.0.26"
 ENV SHA_SUM="57e415b43ee5dfdca74685cc034053eaae962952fdabd086171551a86abf9cd8"
 
-RUN addgroup privoxy && \
-    adduser -H -D -G privoxy privoxy && \
-    echo "privoxy:`head /dev/urandom | tr -dc A-Za-z0-9 | head -c 24 | mkpasswd -m sha256`" | chpasswd
-
 RUN apk add -U --virtual deps \
         autoconf gcc g++ make \
         zlib-dev pcre-dev && \
