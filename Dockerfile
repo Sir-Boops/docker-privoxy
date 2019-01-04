@@ -3,6 +3,9 @@ FROM alpine:3.7
 ENV PRI_VER="3.0.26"
 ENV SHA_SUM="57e415b43ee5dfdca74685cc034053eaae962952fdabd086171551a86abf9cd8"
 
+RUN addgroup privoxy && \
+	adduser -H -D -S -u 1000 -G privoxy privoxy
+
 RUN apk add -U --virtual deps \
         autoconf gcc g++ make \
         zlib-dev pcre-dev && \
